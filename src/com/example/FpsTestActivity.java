@@ -41,10 +41,31 @@ public class FpsTestActivity extends Activity {
             currentFpsView = (TextView) findViewById(R.id.current_fps_view);
         }
 
+        private static final long ONE_SECOND = 1000;
+        private int framesSinceLastSample;
+        private long timeOfLastSample;
+        private int currentFps;
+
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            currentFpsView.setText("" + System.currentTimeMillis());
+            //sleep(33);
+            final long now = System.currentTimeMillis();
+            framesSinceLastSample++;
+            if (now - timeOfLastSample > ONE_SECOND) {
+                timeOfLastSample = now;
+                currentFps = framesSinceLastSample;
+                framesSinceLastSample = 0;
+                currentFpsView.setText("Current FPS is " + currentFps);
+            }
+            //invalidate();
+        }
+
+        private void sleep(int sleepTime) {
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+            }
         }
 
     }
