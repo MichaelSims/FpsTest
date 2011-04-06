@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,6 +58,7 @@ public class FpsTestActivity extends Activity {
                 currentFps = framesSinceLastSample;
                 framesSinceLastSample = 0;
                 currentFpsView.setText("Current FPS is " + currentFps);
+                Log.v(TAG, "Current FPS is " + currentFps);
             }
             //invalidate();
         }
