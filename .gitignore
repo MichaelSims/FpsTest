@@ -1,0 +1,5 @@
+gen
+bin
+*.iml
+*.ipr
+*.iws
