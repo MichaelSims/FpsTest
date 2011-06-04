@@ -6,10 +6,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 
 public class FpsTestActivity extends Activity {
 
@@ -24,52 +21,6 @@ public class FpsTestActivity extends Activity {
 
         final ListView listView = (ListView) findViewById(R.id.my_list_view);
         listView.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, LIST_DATA));
-    }
-
-    public static class MyLayout extends LinearLayout {
-
-        private TextView currentFpsView;
-
-        public MyLayout(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            setWillNotDraw(false);
-        }
-
-        @Override
-        protected void onFinishInflate() {
-            super.onFinishInflate();
-            setWillNotDraw(false);
-            currentFpsView = (TextView) findViewById(R.id.current_fps_view);
-        }
-
-        private static final long ONE_SECOND = 1000;
-        private int framesSinceLastSample;
-        private long timeOfLastSample;
-        private int currentFps;
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-            //sleep(33);
-            final long now = System.currentTimeMillis();
-            framesSinceLastSample++;
-            if (now - timeOfLastSample > ONE_SECOND) {
-                timeOfLastSample = now;
-                currentFps = framesSinceLastSample;
-                framesSinceLastSample = 0;
-                currentFpsView.setText("Current FPS is " + currentFps);
-                Log.v(TAG, "Current FPS is " + currentFps);
-            }
-            //invalidate();
-        }
-
-        private void sleep(int sleepTime) {
-            try {
-                Thread.sleep(sleepTime);
-            } catch (InterruptedException e) {
-            }
-        }
-
     }
 
     private static final String[] LIST_DATA = new String[]{
