@@ -4,7 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <supports-screens android:xlargeScreens="true"/>
-    <application android:label="FpsTest" android:icon="@drawable/icon">
+    <application android:label="FpsTest" android:icon="@drawable/icon" android:theme="@android:style/Theme.Light">
         <activity android:name="FpsTestActivity"
                   android:label="@string/app_name">
             <intent-filter>
