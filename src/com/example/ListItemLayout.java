@@ -23,6 +23,11 @@ public class ListItemLayout extends RelativeLayout implements Checkable {
 
     public void setChecked(boolean b) {
         checked = b;
+        if (checked) {
+            setBackgroundResource(R.drawable.press_state_blue_global);
+        } else {
+            setBackgroundDrawable(null);
+        }
     }
 
     public boolean isChecked() {
