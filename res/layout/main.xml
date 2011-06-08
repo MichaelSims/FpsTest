@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="@android:color/black"
     >
-    <ListView
+    <com.example.RoundedRectangleListView
         android:id="@+id/my_list_view"
         android:layout_width="600dp"
         android:layout_height="600dp"

@@ -10,7 +10,7 @@
         android:color="@android:color/white"/>
 
     <corners
-        android:radius="7dp"/>
+        android:radius="@dimen/rounded_radius"/>
     
 </shape>
 
