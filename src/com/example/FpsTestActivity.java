@@ -16,8 +16,6 @@ public class FpsTestActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        final TextView currentFpsView = (TextView) findViewById(R.id.current_fps_view);
-        currentFpsView.setText("Hello there");
 
         final ListView listView = (ListView) findViewById(R.id.my_list_view);
         listView.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, LIST_DATA));
