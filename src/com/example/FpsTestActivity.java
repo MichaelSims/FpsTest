@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.widget.*;
 
 public class FpsTestActivity extends Activity {
@@ -19,6 +20,18 @@ public class FpsTestActivity extends Activity {
 
         final ListView listView = (ListView) findViewById(R.id.my_list_view);
         listView.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, LIST_DATA));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            private View lastActivatedView;
+
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (lastActivatedView != null) {
+                    lastActivatedView.setActivated(false);
+                }
+                view.setActivated(true);
+                lastActivatedView = view;
+            }
+        });
     }
 
     private static final String[] LIST_DATA = new String[]{
