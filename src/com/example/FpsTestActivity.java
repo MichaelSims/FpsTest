@@ -5,7 +5,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.Config;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.*;
 
 public class FpsTestActivity extends Activity {
@@ -19,6 +23,7 @@ public class FpsTestActivity extends Activity {
 
         final ListView listView = (ListView) findViewById(R.id.my_list_view);
         listView.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, LIST_DATA));
+        listView.setAdapter(new MyBaseAdapter(this));
     }
 
     private static final String[] LIST_DATA = new String[]{
@@ -268,4 +273,46 @@ public class FpsTestActivity extends Activity {
             "Wong, Inez",
             "Wong, Leo"
     };
+
+    private static class MyBaseAdapter extends BaseAdapter {
+
+        private LayoutInflater li;
+
+        public MyBaseAdapter(Context context) {
+            li = LayoutInflater.from(context);
+        }
+
+        public int getCount() {
+            return LIST_DATA.length;
+        }
+
+        public Object getItem(int i) {
+            return LIST_DATA[i];
+        }
+
+        public long getItemId(int i) {
+            return -1;
+        }
+
+        public View getView(int i, View convertView, ViewGroup parent) {
+            TextView listItem;
+            ViewHolder viewHolder;
+            if (convertView != null && convertView instanceof TextView) {
+                listItem = (TextView) convertView;
+                viewHolder = (ViewHolder) convertView.getTag();
+            } else {
+                listItem = (TextView) li.inflate(R.layout.list_item, null, false);
+                viewHolder = new ViewHolder();
+                viewHolder.myTextView = (TextView) listItem.findViewById(R.id.myTextView);
+                listItem.setTag(viewHolder);
+            }
+            viewHolder.myTextView.setText(LIST_DATA[i]);
+            return listItem;
+        }
+
+        private static class ViewHolder {
+            TextView myTextView;
+        }
+
+    }
 }
