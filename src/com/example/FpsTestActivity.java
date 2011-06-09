@@ -22,8 +22,9 @@ public class FpsTestActivity extends Activity {
         setContentView(R.layout.main);
 
         final ListView listView = (ListView) findViewById(R.id.my_list_view);
-        listView.setAdapter(new ArrayAdapter<String>(this, R.layout.list_item, LIST_DATA));
+        listView.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         listView.setAdapter(new MyBaseAdapter(this));
+        listView.setItemChecked(0, true);
     }
 
     private static final String[] LIST_DATA = new String[]{
