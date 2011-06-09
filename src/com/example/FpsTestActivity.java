@@ -2,11 +2,8 @@ package com.example;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.AttributeSet;
-import android.util.Config;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -296,13 +293,13 @@ public class FpsTestActivity extends Activity {
         }
 
         public View getView(int i, View convertView, ViewGroup parent) {
-            TextView listItem;
+            View listItem;
             ViewHolder viewHolder;
             if (convertView != null && convertView instanceof TextView) {
-                listItem = (TextView) convertView;
+                listItem = convertView;
                 viewHolder = (ViewHolder) convertView.getTag();
             } else {
-                listItem = (TextView) li.inflate(R.layout.list_item, null, false);
+                listItem = li.inflate(R.layout.list_item, null, false);
                 viewHolder = new ViewHolder();
                 viewHolder.myTextView = (TextView) listItem.findViewById(R.id.myTextView);
                 listItem.setTag(viewHolder);
@@ -315,5 +312,47 @@ public class FpsTestActivity extends Activity {
             TextView myTextView;
         }
 
+    }
+
+    private static class ListItemLayout extends RelativeLayout implements Checkable {
+
+        private CheckedTextView textView;
+
+        public ListItemLayout(Context context) {
+            super(context);
+            init(context);
+        }
+
+        public ListItemLayout(Context context, AttributeSet attrs) {
+            super(context, attrs);
+            init(context);
+        }
+
+        public ListItemLayout(Context context, AttributeSet attrs, int defStyle) {
+            super(context, attrs, defStyle);
+            init(context);
+        }
+
+        private void init(Context context) {
+
+        }
+
+        @Override
+        protected void onFinishInflate() {
+            super.onFinishInflate();
+            textView = (CheckedTextView) findViewById(R.id.myTextView);
+        }
+
+        public void setChecked(boolean b) {
+            textView.setChecked(b);
+        }
+
+        public boolean isChecked() {
+            return textView.isChecked();
+        }
+
+        public void toggle() {
+            textView.toggle();
+        }
     }
 }
