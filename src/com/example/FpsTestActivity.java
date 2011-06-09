@@ -316,25 +316,31 @@ public class FpsTestActivity extends Activity {
 
     private static class ListItemLayout extends RelativeLayout implements Checkable {
 
+        private static final int[] CHECKED_STATE_SET = {
+                android.R.attr.state_checked
+        };
+
         private CheckedTextView textView;
 
         public ListItemLayout(Context context) {
             super(context);
-            init(context);
         }
 
         public ListItemLayout(Context context, AttributeSet attrs) {
             super(context, attrs);
-            init(context);
         }
 
         public ListItemLayout(Context context, AttributeSet attrs, int defStyle) {
             super(context, attrs, defStyle);
-            init(context);
         }
 
-        private void init(Context context) {
-
+        @Override
+        protected int[] onCreateDrawableState(int extraSpace) {
+            int[] drawableState = super.onCreateDrawableState(extraSpace + 1);
+            if (isChecked()) {
+                mergeDrawableStates(drawableState, CHECKED_STATE_SET);
+            }
+            return drawableState;
         }
 
         @Override
@@ -344,15 +350,20 @@ public class FpsTestActivity extends Activity {
         }
 
         public void setChecked(boolean b) {
-            textView.setChecked(b);
+            if (textView.isChecked() != b) {
+                textView.setChecked(b);
+                refreshDrawableState();
+            }
         }
 
         public boolean isChecked() {
-            return textView.isChecked();
+            /* Check for null here since this is called before we are fully inflated */
+            return textView != null ? textView.isChecked() : false;
         }
 
         public void toggle() {
             textView.toggle();
         }
     }
+
 }
