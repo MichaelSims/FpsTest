@@ -5,30 +5,32 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ListView;
 
-public class RoundedRectangleListView extends ListView {
+public class RoundedCornerListView extends ListView {
 
     private Path path;
     private int roundedRadius;
 
-    public RoundedRectangleListView(Context context) {
+    public RoundedCornerListView(Context context) {
         super(context);
         init();
     }
 
-    public RoundedRectangleListView(Context context, AttributeSet attrs) {
+    public RoundedCornerListView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public RoundedRectangleListView(Context context, AttributeSet attrs, int defStyle) {
+    public RoundedCornerListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
     private void init() {
         roundedRadius = getResources().getDimensionPixelSize(R.dimen.rounded_radius);
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
